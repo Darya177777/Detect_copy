@@ -1,0 +1,7 @@
+Examples of using:
+python laba1.py 224.1.1.1 5007
+python laba1.py ff02::abcd:1 8080
+
+This program needs two arguments for running: ip address(IPv4/IPv6) and port;
+It detects copies of itself and print ip address to console. If this copy disappears, 
+program also will report about this.
