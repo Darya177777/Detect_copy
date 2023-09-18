@@ -19,8 +19,9 @@ def simple_recv(MCAST_GRP, MCAST_PORT):
     mreq = struct.pack("4sl", socket.inet_aton(MCAST_GRP), socket.INADDR_ANY)
     sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
     sock.settimeout(0.1)
+    size = 10240
     try:
-        s = sock.recv(10240).decode('utf-8')
+        s = sock.recv(size).decode('utf-8')
         if s[-1] == 'o':
             print(s.split()[0] + " appear")
             ip_list[s.split()[0]] = 0
@@ -49,8 +50,9 @@ def hard_recv(MCAST_GRP, MCAST_PORT):
                        (chr(0) * 16).encode('utf-8'))
     sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_JOIN_GROUP, mreq)
     sock.settimeout(0.1)
+    size = 10240
     try:
-        s = sock.recv(10240).decode('utf-8')
+        s = sock.recv(size).decode('utf-8')
         if s[-1] == 'o':
             print(s.split()[0] + " appear")
             ip_list[s.split()[0]] = 0
@@ -62,11 +64,6 @@ def hard_recv(MCAST_GRP, MCAST_PORT):
     except Exception:
         pass
     sock.close()
-
-# MCAST_GRP = '224.1.1.1'
-# MCAST_PORT = 5007
-# MCAST_GRP = 'ff02::abcd:1'
-# MCAST_PORT = 8080
 
 
 ip_list = {}
